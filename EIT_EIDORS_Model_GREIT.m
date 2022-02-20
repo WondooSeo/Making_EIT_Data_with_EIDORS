@@ -5,10 +5,15 @@ function EIT_EIDORS_Model_GREIT()
     end
     EIT_GREIT_Filepath = '.\EIT_EIDORS_Model_GREIT';
 
-    if ~exist('.\EIT_V_EIDORS_Model_GREIT','dir')
-        mkdir('.\EIT_V_EIDORS_Model_GREIT');
+    if ~exist('.\EIT_EIDORS_Model_GREIT_Voltage','dir')
+        mkdir('.\EIT_EIDORS_Model_GREIT_Voltage');
     end
-    EIT_V_Filepath = '.\EIT_V_EIDORS_Model_GREIT';
+    EIT_V_Filepath = '.\EIT_EIDORS_Model_GREIT_Voltage';
+
+    if ~exist('.\EIT_EIDORS_Model_GREIT_CP','dir')
+        mkdir('.\EIT_EIDORS_Model_GREIT_CP');
+    end
+    EIT_CP_Filepath = '.\EIT_EIDORS_Model_GREIT_CP';
 
 %% Get Contours
     thorax = shape_library('get','adult_male','boundary');
@@ -122,13 +127,14 @@ function EIT_EIDORS_Model_GREIT()
     bodyShape128 = imcomplement(bodyShape128);
 
 %% Change the collapse area
-    for collapseCase = 5:5
+    for collapseCase = 1:16%5:5
         tempImg = SImg;
         switch collapseCase
     
             % Do nothing, which is normal lung
             case 1            
                 targetLungElem = lungElem;
+                collapseP = 0;
             
             % Right lung collapse 5%
             case 2
@@ -277,7 +283,7 @@ function EIT_EIDORS_Model_GREIT()
             % -- Change image into 128*128
             F = scatteredInterpolant(xy(:,1),xy(:,2),reconResult);
             % Need to change the constant for each cases
-            gridReconResult = flipud(F(qx,qy)) / 300;
+            gridReconResult = flipud(F(qx,qy)) / 400;
             gridReconResult(gridReconResult<0) = 0;
             % This makes outer body pixel zero (post processing)
             gridReconResult = gridReconResult .* bodyShape128;
@@ -286,8 +292,10 @@ function EIT_EIDORS_Model_GREIT()
             % Save 128*128 image & voltage data for training
             imgPath = [EIT_GREIT_Filepath '\EIT_EIDORS_Model_GREIT_collapse_case_' num2str(collapseCase) '_' num2str(iter) '.png'];
             imwrite(gridReconResult,imgPath,'PNG'); close;
-            VPath = [EIT_V_Filepath '\EIT_V_EIDORS_Model_GREIT_collapse_case_' num2str(collapseCase) '_' num2str(iter) '.csv'];
+            VPath = [EIT_V_Filepath '\EIT_EIDORS_Model_GREIT_Voltage_collapse_case_' num2str(collapseCase) '_' num2str(iter) '.csv'];
             writematrix(V',VPath);
+            CPPath = [EIT_CP_Filepath '\EIT_EIDORS_Model_GREIT_CP_collapse_case_' num2str(collapseCase) '_' num2str(iter) '.csv'];
+            writematrix(collapseP,CPPath);
             disp(['EIDORS Model GREIT Case ' num2str(collapseCase) ' → ' num2str(iter) ' / ' num2str(sigmaLen) ' Finished ...']);
         end
     end
