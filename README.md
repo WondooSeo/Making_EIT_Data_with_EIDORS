@@ -13,34 +13,29 @@ This repo is under construction.
 # Tips for Making New Thorax Shape in EIDORS
 
 1. Find appropriate axial lung CT image.
-
 2. Load image with x-axis as linspace(-1,1,num of width pixel) and y-axsis as linspace(reduced ratio,reduced ratio,num of height pixel).
 
        If the size of image is 1000×500, then set x-axis as linspace(-1,1,1000) and y-axis as linspace(-0.5,0.5,500).
-  
+       
 3. Point the thorax boundary. Recommended number of boundary points is 40±5.
-
 4. Point the both lung boundary. Recommended number of single lung points is 20±3.
-
-5. Save points as (x1 y1; x2 y2; ...), and make a structure includes boundary, both lungs points.
-
+5. Save points as [ x1 y1; x2 y2; ... ], and make a structure includes boundary, both lungs points.
 6. Go to EIDORS → models → shape_library.mat, and save the structure in shape_library.mat.
-
 7. Load!
 
   This is the simple example of making user defined shape and load it on code. 
   
-    After finished picking points, let's make a structure name __adult__.
+    After finished picking points, let's make a structure name as adult.
   
-    Then save thorax boundary points as __adult.boundary__,
-      
-    right lung points as __adult.right_lung__,
-      
-    and left lung points as __adult.left_lung__.
-      
-    Save structure __adult__ in __shape_library.mat__ which exists in the path written above.
+    Then save thorax boundary points as adult.boundary,
+    right lung points as adult.right_lung,
+    and left lung points as adult.left_lung.
     
-    Use __shape_library__ function to call your __adult__ file like below;
+    Save structure adult in shape_library.mat which exists in the path written above.
+    
+    If you don't have any idea how to save the points, then see any structures in shape_library.mat.
+    
+    Use shape_library function to call your adult shape like below;
       
     thorax = shape_library('get','adult','boundary');
     rlung  = shape_library('get','adult','right_lung');
