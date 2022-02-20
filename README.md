@@ -16,7 +16,7 @@ This repo is under construction.
 
 2. Load image with x-axis as linspace(-1,1,num of width pixel) and y-axsis as linspace(reduced ratio,reduced ratio,num of height pixel).
 
-    Ex) If the size of image is 1000×500, then set x-axis as linspace(-1,1,1000) and y-axis as linspace(-0.5,0.5,500).
+       If the size of image is 1000×500, then set x-axis as linspace(-1,1,1000) and y-axis as linspace(-0.5,0.5,500).
   
 3. Point the thorax boundary. Recommended number of boundary points is 40±5.
 
