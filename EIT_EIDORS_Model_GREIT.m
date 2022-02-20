@@ -67,7 +67,7 @@ function EIT_EIDORS_Model_GREIT()
     sigma = 0.1*amp.*sin(sigmaX)+0.25;
     
 %% Making Inverse Model & Solver in Advance
-    opt.imgsz = [64 64];
+    opt.imgsz = [128 128];
     opt.square_pixels = 1;
     opt.Nsim = 500; % 500 hundred targets to train on, seems enough
     opt.distr = 3; % non-random, uniform
@@ -105,12 +105,13 @@ function EIT_EIDORS_Model_GREIT()
     ti = -meshsize:(2*meshsize)/(nPixel-1):meshsize;
     [qx,qy] = meshgrid(ti,ti);
 
+    % -- No use area
     % This is for training data
-    img.elem_data(lungElem) = sigma(1);
+    % img.elem_data(lungElem) = sigma(1);
     % This is for showing data
-    % img.elem_data(lungElem) = sigma(1070);
-    vkRef = fwd_solve(img);
-    vCRef = vkRef.meas;
+    % img.elem_data(lungElem) = sigma(350);
+    % vkRef = fwd_solve(img);
+    % vCRef = vkRef.meas;
 
     % bodyShpae128 : makes outer body pixels zero (Need for post processing)
     bodyShape = zeros(numElement,1);
@@ -121,7 +122,7 @@ function EIT_EIDORS_Model_GREIT()
     bodyShape128 = imcomplement(bodyShape128);
 
 %% Change the collapse area
-    for collapseCase = 1:16
+    for collapseCase = 5:5
         tempImg = SImg;
         switch collapseCase
     
@@ -267,21 +268,22 @@ function EIT_EIDORS_Model_GREIT()
             vk = fwd_solve(tempImg);
             vCase = vk.meas;
     
-            V = vCase - vCRef;
+            % V = vCRef - vCase;
+            V = vRef - vCase;
             % vErr = innerTerm*V;
             % V = V - vErr; % -- CAUTION !!!
             reconResult = reconSolver*V;
     
-            % -- Change image into 64*64
+            % -- Change image into 128*128
             F = scatteredInterpolant(xy(:,1),xy(:,2),reconResult);
             % Need to change the constant for each cases
-            gridReconResult = flipud(F(qx,qy)) ./ 150;
+            gridReconResult = flipud(F(qx,qy)) / 300;
             gridReconResult(gridReconResult<0) = 0;
             % This makes outer body pixel zero (post processing)
             gridReconResult = gridReconResult .* bodyShape128;
-            % figure; imagesc(gridReconResult); axis square tight off % Check
+            figure; imagesc(gridReconResult); axis square tight off % Check
     
-            % Save 64*64 image & voltage data for training
+            % Save 128*128 image & voltage data for training
             imgPath = [EIT_GREIT_Filepath '\EIT_EIDORS_Model_GREIT_collapse_case_' num2str(collapseCase) '_' num2str(iter) '.png'];
             imwrite(gridReconResult,imgPath,'PNG'); close;
             VPath = [EIT_V_Filepath '\EIT_V_EIDORS_Model_GREIT_collapse_case_' num2str(collapseCase) '_' num2str(iter) '.csv'];
