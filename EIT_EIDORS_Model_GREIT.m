@@ -127,7 +127,7 @@ function EIT_EIDORS_Model_GREIT()
     bodyShape128 = imcomplement(bodyShape128);
 
 %% Change the collapse area
-    for collapseCase = 1:16%5:5
+    for collapseCase = 1:19%19:19
         tempImg = SImg;
         switch collapseCase
     
@@ -251,6 +251,30 @@ function EIT_EIDORS_Model_GREIT()
             % Both lung collapse 25%
             case 16
                 collapseArea = inline('(x/0.8).^2 + ((y+0.391)/0.2).^2 < 1','x','y','z');
+                [row, ~] = find(elem_select(tempImg.fwd_model, collapseArea));
+                targetLungElem = setdiff(lungElem,row);
+                collapseP = 1 - length(targetLungElem) / length(lungElem);
+                disp(collapseP);
+
+            % Both lung collapse 30%
+            case 17
+                collapseArea = inline('(x/0.8).^2 + ((y+0.35)/0.2).^2 < 1','x','y','z');
+                [row, ~] = find(elem_select(tempImg.fwd_model, collapseArea));
+                targetLungElem = setdiff(lungElem,row);
+                collapseP = 1 - length(targetLungElem) / length(lungElem);
+                disp(collapseP);
+
+            % Both lung collapse 35%
+            case 18
+                collapseArea = inline('(x/0.8).^2 + ((y+0.31)/0.2).^2 < 1','x','y','z');
+                [row, ~] = find(elem_select(tempImg.fwd_model, collapseArea));
+                targetLungElem = setdiff(lungElem,row);
+                collapseP = 1 - length(targetLungElem) / length(lungElem);
+                disp(collapseP);
+
+            % Both lung collapse 40%
+            case 19
+                collapseArea = inline('(x/0.8).^2 + ((y+0.288)/0.22).^2 < 1','x','y','z');
                 [row, ~] = find(elem_select(tempImg.fwd_model, collapseArea));
                 targetLungElem = setdiff(lungElem,row);
                 collapseP = 1 - length(targetLungElem) / length(lungElem);
