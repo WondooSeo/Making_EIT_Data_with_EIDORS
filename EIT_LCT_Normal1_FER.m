@@ -316,7 +316,7 @@ function EIT_LCT_Normal1_FER()
             % -- Change image into 128*128
             F = scatteredInterpolant(xy(:,1),xy(:,2),reconResult);
             % Need to change the constant for each cases
-            gridReconResult = flipud(F(qx,qy)) .* 2;
+            gridReconResult = flipud(F(qx,qy)) .* 3;
             gridReconResult(gridReconResult<0) = 0;
             % This makes outer body pixel zero (post processing)
             gridReconResult = gridReconResult .* bodyShape128;
