@@ -4,7 +4,7 @@
 
 **[CAUTION] This repo is under construction.**
 
-Language : Matlab
+Language : Matlab R2021b (Run checked on Matlab 2018b)
 
 Before running this code, you have to run specific EIDORS version so that 2D GREIT works.
 
