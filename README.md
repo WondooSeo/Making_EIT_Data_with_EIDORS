@@ -6,6 +6,10 @@
 
 Language : Matlab R2021b (Run checked on Matlab 2018b)
 
+Add-on : Statistics and Machine Learning Toolbox / Simulink / Partial Differential Equation Toolbox / Image Processing Toolbox / Computer Vision Toolbox
+
+(I wrote what I installed from now, so please keep in mind that there may be useless add-ons or missed add-ons)
+
 Before running this code, you have to run specific EIDORS version so that 2D GREIT works.
 
 So, if you want to run it, please [_DOWNLOAD the EIDORS HERE_](https://drive.google.com/file/d/13vq98D0IIuffYSmG_e6PpMnI3igh6yud/view?usp=sharing).
