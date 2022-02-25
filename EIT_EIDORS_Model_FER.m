@@ -13,7 +13,7 @@ function EIT_EIDORS_Model_FER()
     if ~exist('.\EIT_EIDORS_Model_FER_CP','dir')
         mkdir('.\EIT_EIDORS_Model_FER_CP');
     end
-    EIT_CP_Filepath = '.\EIT_EIDORS_Model_GREIT_CP';
+    EIT_CP_Filepath = '.\EIT_EIDORS_Model_FER_CP';
 
 %% Get Contours
     thorax = shape_library('get','adult_male','boundary');
