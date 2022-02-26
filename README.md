@@ -17,7 +17,7 @@ So, if you want to run it, please [_DOWNLOAD the EIDORS HERE_](https://drive.goo
 # Tips for Making New Thorax Shape in EIDORS
 
 1. Find appropriate axial lung CT image.
-2. Load image with x-axis as linspace(-1,1,num of width pixel) and y-axsis as linspace(reduced ratio,reduced ratio,num of height pixel).
+2. Load image with x-axis as linspace(-1,1,num of width pixel) and y-axsis as linspace(reduced/increased ratio,reduced/increased ratio,num of height pixel).
 
        If the size of image is 1000×500, then set x-axis as linspace(-1,1,1000) and y-axis as linspace(-0.5,0.5,500).
        
