@@ -1,19 +1,19 @@
-function EIT_LCT_Normal3_FER()
+function EIT_LCT_Normal3_GREIT()
 %% Make folder and set filePath
-    if ~exist('.\EIT_LCT_Normal3_FER','dir')
-        mkdir('.\EIT_LCT_Normal3_FER');
+    if ~exist('.\EIT_LCT_Normal3_GREIT','dir')
+        mkdir('.\EIT_LCT_Normal3_GREIT');
     end
-    EIT_FER_Filepath = '.\EIT_LCT_Normal3_FER';
+    EIT_GREIT_Filepath = '.\EIT_LCT_Normal3_GREIT';
 
-    if ~exist('.\EIT_LCT_Normal3_FER_Voltage','dir')
-        mkdir('.\EIT_LCT_Normal3_FER_Voltage');
+    if ~exist('.\EIT_LCT_Normal3_GREIT_Voltage','dir')
+        mkdir('.\EIT_LCT_Normal3_GREIT_Voltage');
     end
-    EIT_V_Filepath = '.\EIT_LCT_Normal3_FER_Voltage';
+    EIT_V_Filepath = '.\EIT_LCT_Normal3_GREIT_Voltage';
 
-    if ~exist('.\EIT_LCT_Normal3_FER_CP','dir')
-        mkdir('.\EIT_LCT_Normal3_FER_CP');
+    if ~exist('.\EIT_LCT_Normal3_GREIT_CP','dir')
+        mkdir('.\EIT_LCT_Normal3_GREIT_CP');
     end
-    EIT_CP_Filepath = '.\EIT_LCT_Normal3_FER_CP';
+    EIT_CP_Filepath = '.\EIT_LCT_Normal3_GREIT_CP';
 
 %% Get Contours
     thorax = shape_library('get','lct_normal3','boundary');
@@ -58,10 +58,11 @@ function EIT_LCT_Normal3_FER()
     element = img.fwd_model.elems;
     node = img.fwd_model.nodes;
     
-    % -- Save img at compareImg to calculate S
+    % -- Save img at compareImg to calculate S 
+    % In GREIT, use it for tempImg
     SImg = img;
     
-    % -- Set lung conductivity
+    % -- Set initial lung conductivity
     img.elem_data(fmdl.mat_idx{1}) = 1;
     lungElem = [fmdl.mat_idx{2}; fmdl.mat_idx{3}]; % 2 : Right, 3 : Left
     
@@ -70,20 +71,22 @@ function EIT_LCT_Normal3_FER()
     amp = linspace(1,1.3,sigmaLen);
     sigma = 0.1*amp.*sin(sigmaX)+0.25;
     
-    S = calc_jacobian(SImg);
-    S_normal = zeros(size(S));
-    for kk = 1:size(S,2)
-        S_normal(:,kk) = S(:,kk)/norm(S(:,kk));
-    end
-    W = diag(1./sum(abs(S'*S_normal)));
-    reconSolver = W*S_normal';
+%% Making Inverse Model & Solver in Advance
+    opt.imgsz = [128 128];
+    opt.square_pixels = 1;
+    opt.Nsim = 500; % 500 hundred targets to train on, seems enough
+    opt.distr = 3; % non-random, uniform
+    opt.target_size = 0.02; %small targets
+    opt.target_offset = 0;
+    opt.noise_figure = 0.5; % this is key!
+    imdl = mk_GREIT_model(img, 0.2, [], opt);
+    imdl.fwd_model.meas_select = fmdl.meas_sel;
 
-    %% Detect Motion Artifact & Calculate VErr
+    reconSolver = imdl.solve_use_matrix.RM;
+
+%% Find Boundary
     boundaryNode = unique(img.fwd_model.boundary(:));
     element = img.fwd_model.elems;
-    node = img.fwd_model.nodes;
-    boundaryLambda = 1e-10;
-
     boundaryElement = [];
     for iter = 1:length(element)
         for innerIter = 1:length(boundaryNode)
@@ -95,18 +98,6 @@ function EIT_LCT_Normal3_FER()
     end
 
     boundaryElement = sort(unique(boundaryElement));
-    numboundaryElement = length(boundaryElement);
-
-    % Pick S columnn and subtract artifact
-    realIndexLength = length(vRef);
-    boundaryS = zeros(realIndexLength, numboundaryElement);
-    % for iter = 1:numboundaryElement
-    %     boundaryS(:,iter) = S(:,boundaryElement(iter));
-    % end
-    boundaryS = S(:,boundaryElement);
-    % innerTerm = (boundaryS'*boundaryS + boundaryLambda*eye(numboundaryElement))\boundaryS';
-    % innerTerm = boundaryS * innerTerm;
-    innerTerm = eye(size(S,1)) - ((boundaryS*boundaryS'+boundaryLambda*eye(size(S,1)))\(boundaryS*boundaryS'));
 
 %% Change triangle mesh to grid mesh
     for i = 1:size(element,1)
@@ -147,7 +138,7 @@ function EIT_LCT_Normal3_FER()
             
             % Right lung collapse 5%
             case 2
-                collapseArea = inline('((x+0.43)/0.32).^2 + ((y+0.59)/0.16).^2 < 1','x','y','z');
+                collapseArea = inline('((x+0.34)/0.32).^2 + ((y+0.49)/0.16).^2 < 1','x','y','z');
                 [row, ~] = find(elem_select(tempImg.fwd_model, collapseArea));
                 targetLungElem = setdiff(lungElem,row);
                 collapseP = 1 - length(targetLungElem) / length(lungElem);
@@ -155,7 +146,7 @@ function EIT_LCT_Normal3_FER()
     
             % Right lung collapse 10%
             case 3
-                collapseArea = inline('((x+0.46)/0.32).^2 + ((y+0.48)/0.16).^2 < 1','x','y','z');
+                collapseArea = inline('((x+0.34)/0.32).^2 + ((y+0.39)/0.16).^2 < 1','x','y','z');
                 [row, ~] = find(elem_select(tempImg.fwd_model, collapseArea));
                 targetLungElem = setdiff(lungElem,row);
                 collapseP = 1 - length(targetLungElem) / length(lungElem);
@@ -163,7 +154,7 @@ function EIT_LCT_Normal3_FER()
     
             % Right lung collapse 15%
             case 4
-                collapseArea = inline('((x+0.46)/0.38).^2 + ((y+0.44)/0.2).^2 < 1','x','y','z');
+                collapseArea = inline('((x+0.34)/0.32).^2 + ((y+0.3)/0.16).^2 < 1','x','y','z');
                 [row, ~] = find(elem_select(tempImg.fwd_model, collapseArea));
                 targetLungElem = setdiff(lungElem,row);
                 collapseP = 1 - length(targetLungElem) / length(lungElem);
@@ -171,7 +162,7 @@ function EIT_LCT_Normal3_FER()
             
             % Right lung collapse 20%
             case 5
-                collapseArea = inline('((x+0.46)/0.4).^2 + ((y+0.385)/0.23).^2 < 1','x','y','z');
+                collapseArea = inline('((x+0.34)/0.32).^2 + ((y+0.25)/0.2).^2 < 1','x','y','z');
                 [row, ~] = find(elem_select(tempImg.fwd_model, collapseArea));
                 targetLungElem = setdiff(lungElem,row);
                 collapseP = 1 - length(targetLungElem) / length(lungElem);
@@ -179,7 +170,7 @@ function EIT_LCT_Normal3_FER()
             
             % Right lung collapse 25%
             case 6
-                collapseArea = inline('((x+0.46)/0.44).^2 + ((y+0.34)/0.26).^2 < 1','x','y','z');
+                collapseArea = inline('((x+0.34)/0.35).^2 + ((y+0.21)/0.24).^2 < 1','x','y','z');
                 [row, ~] = find(elem_select(tempImg.fwd_model, collapseArea));
                 targetLungElem = setdiff(lungElem,row);
                 collapseP = 1 - length(targetLungElem) / length(lungElem);
@@ -187,7 +178,7 @@ function EIT_LCT_Normal3_FER()
     
             % Left lung collapse 5%
             case 7
-                collapseArea = inline('((x-0.38)/0.32).^2 + ((y+0.58)/0.16).^2 < 1','x','y','z');
+                collapseArea = inline('((x-0.34)/0.32).^2 + ((y+0.52)/0.16).^2 < 1','x','y','z');
                 [row, ~] = find(elem_select(tempImg.fwd_model, collapseArea));
                 targetLungElem = setdiff(lungElem,row);
                 collapseP = 1 - length(targetLungElem) / length(lungElem);
@@ -195,7 +186,7 @@ function EIT_LCT_Normal3_FER()
     
             % Left lung collapse 10%
             case 8
-                collapseArea = inline('((x-0.44)/0.32).^2 + ((y+0.485)/0.16).^2 < 1','x','y','z');
+                collapseArea = inline('((x-0.34)/0.32).^2 + ((y+0.42)/0.16).^2 < 1','x','y','z');
                 [row, ~] = find(elem_select(tempImg.fwd_model, collapseArea));
                 targetLungElem = setdiff(lungElem,row);
                 collapseP = 1 - length(targetLungElem) / length(lungElem);
@@ -203,7 +194,7 @@ function EIT_LCT_Normal3_FER()
     
             % Left lung collapse 15%
             case 9
-                collapseArea = inline('((x-0.44)/0.32).^2 + ((y+0.4)/0.18).^2 < 1','x','y','z');
+                collapseArea = inline('((x-0.4)/0.32).^2 + ((y+0.34)/0.16).^2 < 1','x','y','z');
                 [row, ~] = find(elem_select(tempImg.fwd_model, collapseArea));
                 targetLungElem = setdiff(lungElem,row);
                 collapseP = 1 - length(targetLungElem) / length(lungElem);
@@ -211,7 +202,7 @@ function EIT_LCT_Normal3_FER()
     
             % Left lung collapse 20%
             case 10
-                collapseArea = inline('((x-0.48)/0.32).^2 + ((y+0.37)/0.25).^2 < 1','x','y','z');
+                collapseArea = inline('((x-0.4)/0.32).^2 + ((y+0.29)/0.2).^2 < 1','x','y','z');
                 [row, ~] = find(elem_select(tempImg.fwd_model, collapseArea));
                 targetLungElem = setdiff(lungElem,row);
                 collapseP = 1 - length(targetLungElem) / length(lungElem);
@@ -219,7 +210,7 @@ function EIT_LCT_Normal3_FER()
     
             % Left lung collapse 25%
             case 11
-                collapseArea = inline('((x-0.48)/0.34).^2 + ((y+0.32)/0.3).^2 < 1','x','y','z');
+                collapseArea = inline('((x-0.44)/0.34).^2 + ((y+0.25)/0.23).^2 < 1','x','y','z');
                 [row, ~] = find(elem_select(tempImg.fwd_model, collapseArea));
                 targetLungElem = setdiff(lungElem,row);
                 collapseP = 1 - length(targetLungElem) / length(lungElem);
@@ -227,7 +218,7 @@ function EIT_LCT_Normal3_FER()
     
             % Both lung collapse 5%
             case 12
-                collapseArea = inline('(x/0.8).^2 + ((y+0.67)/0.2).^2 < 1','x','y','z');
+                collapseArea = inline('(x/0.8).^2 + ((y+0.59)/0.2).^2 < 1','x','y','z');
                 [row, ~] = find(elem_select(tempImg.fwd_model, collapseArea));
                 targetLungElem = setdiff(lungElem,row);
                 collapseP = 1 - length(targetLungElem) / length(lungElem);
@@ -235,7 +226,7 @@ function EIT_LCT_Normal3_FER()
     
             % Both lung collapse 10%
             case 13
-                collapseArea = inline('(x/0.8).^2 + ((y+0.61)/0.2).^2 < 1','x','y','z');
+                collapseArea = inline('(x/0.8).^2 + ((y+0.53)/0.2).^2 < 1','x','y','z');
                 [row, ~] = find(elem_select(tempImg.fwd_model, collapseArea));
                 targetLungElem = setdiff(lungElem,row);
                 collapseP = 1 - length(targetLungElem) / length(lungElem);
@@ -243,7 +234,7 @@ function EIT_LCT_Normal3_FER()
     
             % Both lung collapse 15%
             case 14
-                collapseArea = inline('(x/0.8).^2 + ((y+0.55)/0.2).^2 < 1','x','y','z');
+                collapseArea = inline('(x/0.8).^2 + ((y+0.485)/0.2).^2 < 1','x','y','z');
                 [row, ~] = find(elem_select(tempImg.fwd_model, collapseArea));
                 targetLungElem = setdiff(lungElem,row);
                 collapseP = 1 - length(targetLungElem) / length(lungElem);
@@ -251,7 +242,7 @@ function EIT_LCT_Normal3_FER()
             
             % Both lung collapse 20%
             case 15
-                collapseArea = inline('(x/0.8).^2 + ((y+0.5)/0.2).^2 < 1','x','y','z');
+                collapseArea = inline('(x/0.8).^2 + ((y+0.435)/0.2).^2 < 1','x','y','z');
                 [row, ~] = find(elem_select(tempImg.fwd_model, collapseArea));
                 targetLungElem = setdiff(lungElem,row);
                 collapseP = 1 - length(targetLungElem) / length(lungElem);
@@ -259,7 +250,7 @@ function EIT_LCT_Normal3_FER()
     
             % Both lung collapse 25%
             case 16
-                collapseArea = inline('(x/0.8).^2 + ((y+0.46)/0.2).^2 < 1','x','y','z');
+                collapseArea = inline('(x/0.8).^2 + ((y+0.391)/0.2).^2 < 1','x','y','z');
                 [row, ~] = find(elem_select(tempImg.fwd_model, collapseArea));
                 targetLungElem = setdiff(lungElem,row);
                 collapseP = 1 - length(targetLungElem) / length(lungElem);
@@ -267,7 +258,7 @@ function EIT_LCT_Normal3_FER()
 
             % Both lung collapse 30%
             case 17
-                collapseArea = inline('(x/0.8).^2 + ((y+0.45)/0.25).^2 < 1','x','y','z');
+                collapseArea = inline('(x/0.8).^2 + ((y+0.35)/0.2).^2 < 1','x','y','z');
                 [row, ~] = find(elem_select(tempImg.fwd_model, collapseArea));
                 targetLungElem = setdiff(lungElem,row);
                 collapseP = 1 - length(targetLungElem) / length(lungElem);
@@ -275,7 +266,7 @@ function EIT_LCT_Normal3_FER()
 
             % Both lung collapse 35%
             case 18
-                collapseArea = inline('(x/0.8).^2 + ((y+0.42)/0.28).^2 < 1','x','y','z');
+                collapseArea = inline('(x/0.8).^2 + ((y+0.31)/0.2).^2 < 1','x','y','z');
                 [row, ~] = find(elem_select(tempImg.fwd_model, collapseArea));
                 targetLungElem = setdiff(lungElem,row);
                 collapseP = 1 - length(targetLungElem) / length(lungElem);
@@ -283,7 +274,7 @@ function EIT_LCT_Normal3_FER()
 
             % Both lung collapse 40%
             case 19
-                collapseArea = inline('(x/0.8).^2 + ((y+0.375)/0.28).^2 < 1','x','y','z');
+                collapseArea = inline('(x/0.8).^2 + ((y+0.288)/0.22).^2 < 1','x','y','z');
                 [row, ~] = find(elem_select(tempImg.fwd_model, collapseArea));
                 targetLungElem = setdiff(lungElem,row);
                 collapseP = 1 - length(targetLungElem) / length(lungElem);
@@ -293,7 +284,7 @@ function EIT_LCT_Normal3_FER()
                 error('Wrong collapseCase!')
         end
         
-%% Run FER and save EIT data during sine TV wave
+%% Run GREIT and save EIT data during sine TV wave
         for iter = 1:sigmaLen
             tempImg.elem_data(targetLungElem) = sigma(iter);
     
@@ -311,25 +302,25 @@ function EIT_LCT_Normal3_FER()
             V = vRef - vCase;
             % vErr = innerTerm*V;
             % V = V - vErr; % -- CAUTION !!!
-            reconResult = reconSolver*innerTerm*V;
+            reconResult = reconSolver*V;
     
             % -- Change image into 128*128
             F = scatteredInterpolant(xy(:,1),xy(:,2),reconResult);
             % Need to change the constant for each cases
-            gridReconResult = flipud(F(qx,qy)) .* 3;
+            gridReconResult = flipud(F(qx,qy)) / 400;
             gridReconResult(gridReconResult<0) = 0;
             % This makes outer body pixel zero (post processing)
             gridReconResult = gridReconResult .* bodyShape128;
             figure; imagesc(gridReconResult); axis square tight off % Check
     
             % Save 128*128 image & voltage data for training
-            imgPath = [EIT_FER_Filepath '\EIT_LCT_Normal3_FER_collapse_case_' num2str(collapseCase) '_' num2str(iter) '.png'];
+            imgPath = [EIT_GREIT_Filepath '\EIT_LCT_Normal3_GREIT_collapse_case_' num2str(collapseCase) '_' num2str(iter) '.png'];
             imwrite(gridReconResult,imgPath,'PNG'); close;
-            VPath = [EIT_V_Filepath '\EIT_LCT_Normal3_FER_Voltage_collapse_case_' num2str(collapseCase) '_' num2str(iter) '.csv'];
+            VPath = [EIT_V_Filepath '\EIT_LCT_Normal3_GREIT_Voltage_collapse_case_' num2str(collapseCase) '_' num2str(iter) '.csv'];
             writematrix(V',VPath);
-            CPPath = [EIT_CP_Filepath '\EIT_LCT_Normal3_FER_CP_collapse_case_' num2str(collapseCase) '_' num2str(iter) '.csv'];
+            CPPath = [EIT_CP_Filepath '\EIT_LCT_Normal3_GREIT_CP_collapse_case_' num2str(collapseCase) '_' num2str(iter) '.csv'];
             writematrix(collapseP,CPPath);
-            disp(['LCT Normal3 FER Case ' num2str(collapseCase) ' → ' num2str(iter) ' / ' num2str(sigmaLen) ' Finished ...']);
+            disp(['LCT Normal3 GREIT Case ' num2str(collapseCase) ' → ' num2str(iter) ' / ' num2str(sigmaLen) ' Finished ...']);
         end
     end
 end
