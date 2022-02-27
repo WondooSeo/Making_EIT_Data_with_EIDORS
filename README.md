@@ -27,6 +27,14 @@ So, if you want to run it, please [_DOWNLOAD the EIDORS HERE_](https://drive.goo
 6. Go to EIDORS → models → shape_library.mat, and save the structure in shape_library.mat.
 7. Load!
 
+<div align = 'center'>
+       
+   ![Pointing](https://user-images.githubusercontent.com/62936579/155882613-af804fc3-5a1f-421d-b775-83e7ba6e0384.png)
+
+   [Fig 1] How to pointing on the CT image
+       
+</div>
+
   This is the simple example of making user defined shape and load it on code. 
   
     After finished picking points, let's make a structure name as adult.
