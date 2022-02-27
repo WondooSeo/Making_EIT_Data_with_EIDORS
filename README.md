@@ -10,9 +10,13 @@ Add-on : Statistics and Machine Learning Toolbox / Simulink / Partial Differenti
 
 (I wrote what I installed from now, so please keep in mind that there may be useless add-ons or missed add-ons)
 
-Before running this code, you have to run specific EIDORS version so that 2D GREIT works.
+Before running this code, you have to run specific EIDORS version so that 2D GREIT works. **Maybe Netgen v 5.0.0 is necessary.**
 
-So, if you want to run it, please [_DOWNLOAD the EIDORS HERE_](https://drive.google.com/file/d/13vq98D0IIuffYSmG_e6PpMnI3igh6yud/view?usp=sharing).
+So, if you want to run it, please [_DOWNLOAD the EIDORS HERE_](https://drive.google.com/file/d/13vq98D0IIuffYSmG_e6PpMnI3igh6yud/view?usp=sharing). This version works perfectly on this file.
+
+But if you have EIDORS with 2D GREIT runnable version, please just [_DOWNLOAD the shape_library.mat HERE.](https://drive.google.com/file/d/1But955M7L8xdOaZs4odmQgIBqiFRlsSQ/view?usp=sharing)
+
+In this shape_library.mat, I added some pointed models. (lct_normal1, lct_normal2, lct_normal3, lct_obese1, lct_obese2)
 
 # Tips for Making New Thorax Shape in EIDORS
 
