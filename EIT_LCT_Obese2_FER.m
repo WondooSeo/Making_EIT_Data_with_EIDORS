@@ -3,7 +3,7 @@ function EIT_LCT_Obese2_FER()
     if ~exist('.\EIT_LCT_Obese2_FER','dir')
         mkdir('.\EIT_LCT_Obese2_FER');
     end
-    EIT_FER_Filepath = '.\EIT_LCT_Obese1_FER';
+    EIT_FER_Filepath = '.\EIT_LCT_Obese2_FER';
 
     if ~exist('.\EIT_LCT_Obese2_FER_Voltage','dir')
         mkdir('.\EIT_LCT_Obese2_FER_Voltage');
