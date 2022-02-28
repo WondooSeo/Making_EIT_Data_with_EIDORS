@@ -2,19 +2,19 @@
 
 # Making_EIT_Data_with_EIDORS
 
-**[CAUTION] This repo is under construction.**
-
 Language : Matlab R2021b
+
+Package : [EIDORS](http://eidors3d.sourceforge.net/)
 
 Add-on : Statistics and Machine Learning Toolbox / Simulink / Partial Differential Equation Toolbox / Image Processing Toolbox / Computer Vision Toolbox
 
 (I wrote what I installed from now, so please keep in mind that there may be useless add-ons)
 
-Before running this code, you have to run specific EIDORS version so that 2D GREIT works. **Maybe Netgen v 5.0.0 is necessary.**
+Before running this code, you have to run specific EIDORS version so that 2D GREIT works. I have no idea which version works 2D GREIT, but **maybe Netgen v 5.0.0 is necessary.**
 
-So, if you want to run it, please [_DOWNLOAD the EIDORS HERE_](https://drive.google.com/file/d/13vq98D0IIuffYSmG_e6PpMnI3igh6yud/view?usp=sharing). This version works perfectly on this file.
+So, if you want to run it without any hesitation, please [_DOWNLOAD the EIDORS HERE_](https://drive.google.com/file/d/13vq98D0IIuffYSmG_e6PpMnI3igh6yud/view?usp=sharing)(Move to my personal Google drive). This version works perfectly on this file.
 
-But if you have EIDORS with 2D GREIT runnable version, please just download shape_library.mat I uploaded above.
+But if you have EIDORS with 2D GREIT runnable version, please just download shape_library.mat I uploaded above and paste it.
 
 In this shape_library.mat, I added some pointed models. (lct_normal1, lct_normal2, lct_normal3, lct_obese1, lct_obese2)
 
@@ -75,3 +75,5 @@ When you change smoothing points or small maxh in shape, then it'll work.
         0.01 ]';                % maxh (electrode refinement)
     
     fmdl = ng_mk_extruded_model(shape, elec_pos, elec_shape);
+    
+If you cannot figure it out anyway, please see my code. That'll work.
