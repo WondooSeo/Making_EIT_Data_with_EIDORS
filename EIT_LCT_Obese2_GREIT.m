@@ -1,3 +1,5 @@
+% This model is not recommended. (Lungs are too close)
+
 function EIT_LCT_Obese2_GREIT()
 %% Make folder and set filePath
     if ~exist('.\EIT_LCT_Obese2_GREIT','dir')
