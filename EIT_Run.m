@@ -14,5 +14,7 @@ EIT_LCT_Normal3_FER();
 EIT_LCT_Normal3_GREIT();
 EIT_LCT_Obese1_FER();
 EIT_LCT_Obese1_GREIT();
-EIT_LCT_Obese2_FER();
-EIT_LCT_Obese2_GREIT();
+% EIT_LCT_Obese2_FER();     % No use
+% EIT_LCT_Obese2_GREIT();   % No use
+EIT_LCT_Obese3_FER();
+EIT_LCT_Obese3_GREIT();
