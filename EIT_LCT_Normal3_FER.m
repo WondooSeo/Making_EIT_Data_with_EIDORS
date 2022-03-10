@@ -3,7 +3,7 @@ function EIT_LCT_Normal3_FER()
     if ~exist('.\EIT_LCT_Normal3_FER','dir')
         mkdir('.\EIT_LCT_Normal3_FER');
     end
-    EIT_GREIT_Filepath = '.\EIT_LCT_Normal3_FER';
+    EIT_FER_Filepath = '.\EIT_LCT_Normal3_FER';
 
     if ~exist('.\EIT_LCT_Normal3_FER_Voltage','dir')
         mkdir('.\EIT_LCT_Normal3_FER_Voltage');
@@ -292,8 +292,14 @@ function EIT_LCT_Normal3_FER()
             otherwise
                 error('Wrong collapseCase!')
         end
+
+        RLungCollapseElem = intersect(fmdl.mat_idx{2},targetLungElem);
+        LLungCollapseElem = intersect(fmdl.mat_idx{3},targetLungElem);
+        RCollapseP = 1 - length(RLungCollapseElem) / length(fmdl.mat_idx{2});
+        LCollapseP = 1 - length(LLungCollapseElem) / length(fmdl.mat_idx{3});
+        disp([RCollapseP, LCollapseP])
         
-%% Run GREIT and save EIT data during sine TV wave
+%% Run FER and save EIT data during sine TV wave
         for iter = 1:sigmaLen
             tempImg.elem_data(targetLungElem) = sigma(iter);
     
@@ -323,12 +329,12 @@ function EIT_LCT_Normal3_FER()
             figure; imagesc(gridReconResult); axis square tight off % Check
     
             % Save 128*128 image & voltage data for training
-            imgPath = [EIT_GREIT_Filepath '\EIT_LCT_Normal3_FER_collapse_case_' num2str(collapseCase) '_' num2str(iter) '.png'];
+            imgPath = [EIT_FER_Filepath '\EIT_LCT_Normal3_FER_collapse_case_' num2str(collapseCase) '_' num2str(iter) '.png'];
             imwrite(gridReconResult,imgPath,'PNG'); close;
             VPath = [EIT_V_Filepath '\EIT_LCT_Normal3_FER_Voltage_collapse_case_' num2str(collapseCase) '_' num2str(iter) '.csv'];
             writematrix(V',VPath);
             CPPath = [EIT_CP_Filepath '\EIT_LCT_Normal3_FER_CP_collapse_case_' num2str(collapseCase) '_' num2str(iter) '.csv'];
-            writematrix(collapseP,CPPath);
+            writematrix([RCollapseP, LCollapseP],CPPath);
             disp(['LCT Normal3 FER Case ' num2str(collapseCase) ' → ' num2str(iter) ' / ' num2str(sigmaLen) ' Finished ...']);
         end
     end
