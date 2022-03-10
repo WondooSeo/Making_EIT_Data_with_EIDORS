@@ -20,7 +20,7 @@ But if you have EIDORS with 2D GREIT runnable version, please just download shap
 
 In this shape_library.mat, I added some pointed models. (lct_normal1, lct_normal2, lct_normal3, lct_obese1, lct_obese2)
 
-Result of the EIT_Run.m : Click [HERE](https://drive.google.com/file/d/1zvge0rYyrzTCDmwZSrSDrtCdahub0EMC/view?usp=sharing)
+Result of the EIT_Run.m : Click [HERE](https://drive.google.com/file/d/1zvge0rYyrzTCDmwZSrSDrtCdahub0EMC/view?usp=sharing) → Have to change soon
 
 # Tips for Making New Thorax Shape in EIDORS
 
