@@ -292,6 +292,12 @@ function EIT_LCT_Normal1_FER()
             otherwise
                 error('Wrong collapseCase!')
         end
+
+        RLungCollapseElem = intersect(fmdl.mat_idx{2},targetLungElem);
+        LLungCollapseElem = intersect(fmdl.mat_idx{3},targetLungElem);
+        RCollapseP = 1 - length(RLungCollapseElem) / length(fmdl.mat_idx{2});
+        LCollapseP = 1 - length(LLungCollapseElem) / length(fmdl.mat_idx{3});
+        disp([RCollapseP, LCollapseP])
         
 %% Run FER and save EIT data during sine TV wave
         for iter = 1:sigmaLen
@@ -320,7 +326,7 @@ function EIT_LCT_Normal1_FER()
             gridReconResult(gridReconResult<0) = 0;
             % This makes outer body pixel zero (post processing)
             gridReconResult = gridReconResult .* bodyShape128;
-            figure; imagesc(gridReconResult); axis square tight off % Check
+            % figure; imagesc(gridReconResult); axis square tight off % Check
     
             % Save 128*128 image & voltage data for training
             imgPath = [EIT_FER_Filepath '\EIT_LCT_Normal1_FER_collapse_case_' num2str(collapseCase) '_' num2str(iter) '.png'];
@@ -328,7 +334,7 @@ function EIT_LCT_Normal1_FER()
             VPath = [EIT_V_Filepath '\EIT_LCT_Normal1_FER_Voltage_collapse_case_' num2str(collapseCase) '_' num2str(iter) '.csv'];
             writematrix(V',VPath);
             CPPath = [EIT_CP_Filepath '\EIT_LCT_Normal1_FER_CP_collapse_case_' num2str(collapseCase) '_' num2str(iter) '.csv'];
-            writematrix(collapseP,CPPath);
+            writematrix([RCollapseP, LCollapseP],CPPath);
             disp(['LCT Normal1 FER Case ' num2str(collapseCase) ' → ' num2str(iter) ' / ' num2str(sigmaLen) ' Finished ...']);
         end
     end
