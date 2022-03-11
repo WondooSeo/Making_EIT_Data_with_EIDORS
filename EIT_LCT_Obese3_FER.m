@@ -136,7 +136,7 @@ function EIT_LCT_Obese3_FER()
     bodyShape128 = imcomplement(bodyShape128);
 
 %% Change the collapse area
-    for collapseCase = 19:19%19:19
+    for collapseCase = 1:19%19:19
         tempImg = SImg;
         switch collapseCase
     
