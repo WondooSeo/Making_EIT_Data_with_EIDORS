@@ -78,4 +78,4 @@ When you change smoothing points, then it'll work.
     
     fmdl = ng_mk_extruded_model(shape, elec_pos, elec_shape);
     
-If you cannot figure it out anyway, please see my code. That'll work.
+If you cannot figure it out anyway, please see my code.
