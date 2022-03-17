@@ -61,12 +61,12 @@ Result of the EIT_Run.m : Click [_HERE_](https://drive.google.com/file/d/1v4pvYW
     
 If you called your defined shape but it doesn't work, change the shape in function __ng_mk_extruded_model__.
     
-When you change smoothing points or small maxh in shape, then it'll work.
+When you change smoothing points, then it'll work.
 
     shape = { 0,                % height
         {thorax, rlung, llung}, % contours
         [4,50],                 % perform smoothing with 50 points    ← Change here!
-        0.04};                  % small maxh (fine mesh)              ← Change here!
+        0.04};                  % small maxh (fine mesh)              
     
     elec_pos = [ 16,            % number of elecs per plane
         1,                      % equidistant spacing
