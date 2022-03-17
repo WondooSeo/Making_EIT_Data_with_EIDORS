@@ -1,4 +1,4 @@
-%% Run It after Initiate MATLAB
+%% Run it after Initiate MATLAB
 % run('./EIDORS/eidors/startup.m')
 
 %%
