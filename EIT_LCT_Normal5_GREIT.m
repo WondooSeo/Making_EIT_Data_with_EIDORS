@@ -8,7 +8,7 @@ function EIT_LCT_Normal5_GREIT()
     if ~exist('.\EIT_LCT_Normal5_GREIT_Voltage','dir')
         mkdir('.\EIT_LCT_Normal5_GREIT_Voltage');
     end
-    EIT_V_Filepath = '.\EIT_LCT_Normal3_GREIT_Voltage';
+    EIT_V_Filepath = '.\EIT_LCT_Normal5_GREIT_Voltage';
 
     if ~exist('.\EIT_LCT_Normal5_GREIT_CP','dir')
         mkdir('.\EIT_LCT_Normal5_GREIT_CP');
