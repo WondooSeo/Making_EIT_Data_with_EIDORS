@@ -20,7 +20,7 @@ In this shape_library.mat, I added some pointed models. (lct_normal1~6, lct_obes
 
 Result of the EIT_Run.m : Click [_HERE_](https://drive.google.com/file/d/1v4pvYWG3csWPQuZWVLxhNOmpaHonYyCy/view?usp=sharing) (Move to my personal Google drive, there's no result of Obese 2)
 
-# Tips for Making New Thorax Shape in EIDORS
+## Tips for Making New Thorax Shape in EIDORS
 
 1. Find appropriate axial lung CT image.
 2. Load image with x-axis as linspace(-1,1,num of width pixel) and y-axsis as linspace(reduced/increased ratio,reduced/increased ratio,num of height pixel).
