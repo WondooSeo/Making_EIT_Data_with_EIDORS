@@ -1,6 +1,6 @@
 ※ _This project is licensed under the terms of the MIT license._ ※
 
-# Making_EIT_Data_with_EIDORS
+# Making EIT Data with EIDORS
 
 Language : Matlab R2021b
 
