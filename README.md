@@ -61,7 +61,7 @@ Result of the EIT_Run.m : Click [_HERE_](https://drive.google.com/file/d/1v4pvYW
     
 If you called your defined shape but it doesn't work, change the shape in function __ng_mk_extruded_model__.
     
-When you change smoothing points, then it'll work.
+When you change smoothing points higher than 50, then it'll work. But be aware; choose just appropriate number so that large number on smoothing points can give a lot of burden to computer resources!
 
     shape = { 0,                % height
         {thorax, rlung, llung}, % contours
