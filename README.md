@@ -18,7 +18,7 @@ But if you have EIDORS with 2D GREIT runnable version, please just download shap
 
 In this shape_library.mat, I added some pointed models. (lct_normal1-6, lct_obese1-3)
 
-Result of the EIT_Run.m : Click [_HERE_](https://drive.google.com/file/d/1v4pvYWG3csWPQuZWVLxhNOmpaHonYyCy/view?usp=sharing) (Move to my personal Google drive, there's no result of Obese 2)
+Result of the EIT_Run.m : Click [_HERE_](https://drive.google.com/file/d/1v4pvYWG3csWPQuZWVLxhNOmpaHonYyCy/view?usp=sharing) (Move to my personal Google drive, there're no results of Normal 4-6 and Obese 2)
 
 ## Tips for Making New Thorax Shape in EIDORS
 
