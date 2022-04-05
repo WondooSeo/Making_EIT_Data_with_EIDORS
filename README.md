@@ -37,7 +37,7 @@ Result of the EIT_Run.m : Click [_HERE_](https://drive.google.com/file/d/1v4pvYW
        
    ![Pointing](https://user-images.githubusercontent.com/62936579/155882613-af804fc3-5a1f-421d-b775-83e7ba6e0384.png)
 
-   [Fig 1] How to pointing on the CT image
+   [Fig. 1] How to pointing on the CT image
        
 </div>
 
@@ -85,6 +85,6 @@ If you cannot figure it out anyway, please see my code.
    
    ![LCT Obese2 Collapse shape (Collapse case 1)](https://user-images.githubusercontent.com/62936579/160920945-ba6b640f-6c1c-4fd6-adf4-f9c002c34bad.png)
 
-   [Fig 2] FEM result on EIDORS with using Fig. 1 image
+   [Fig. 2] FEM result on EIDORS with using Fig. 1 image
        
 </div>
