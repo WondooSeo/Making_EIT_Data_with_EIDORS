@@ -12,6 +12,12 @@ EIT_LCT_Normal2_FER();
 EIT_LCT_Normal2_GREIT();
 EIT_LCT_Normal3_FER();
 EIT_LCT_Normal3_GREIT();
+EIT_LCT_Normal4_FER();
+EIT_LCT_Normal4_GREIT();
+EIT_LCT_Normal5_FER();
+EIT_LCT_Normal5_GREIT();
+EIT_LCT_Normal6_FER();
+EIT_LCT_Normal6_GREIT();
 EIT_LCT_Obese1_FER();
 EIT_LCT_Obese1_GREIT();
 % EIT_LCT_Obese2_FER();     % No use
