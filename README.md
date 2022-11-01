@@ -20,6 +20,8 @@ In this shape_library.mat, I added some pointed models. (lct_normal1-6, lct_obes
 
 <!-- Result of the EIT_Run.m : Click [_HERE_](https://drive.google.com/file/d/1v4pvYWG3csWPQuZWVLxhNOmpaHonYyCy/view?usp=sharing) (Move to my personal Google drive, there're no results of Normal 4-6 and Obese 2) -->
 
+***Also, I'm not sure that all of .m files saves same result value because of research. So you have to modify end of codes (save part) if you have to.***
+
 ## Tips for Making New Thorax Shape in EIDORS
 
 1. Find appropriate axial lung CT image.
