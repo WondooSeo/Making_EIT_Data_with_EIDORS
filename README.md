@@ -27,7 +27,7 @@ In this shape_library.mat, I added some pointed models. (lct_normal1-6, lct_obes
 1. Find appropriate axial lung CT image.
 2. Load image with x-axis as linspace(-1,1,num of width pixel) and y-axsis as linspace(reduced/increased ratio,reduced/increased ratio,num of height pixel).
 
-       If the size of image is 1000×500, then set x-axis as linspace(-1,1,1000) and y-axis as linspace(-0.5,0.5,500).
+   If the size of image is 1000×500, then set x-axis as linspace(-1,1,1000) and y-axis as linspace(-0.5,0.5,500).
        
 3. Point the thorax boundary. Recommended number of boundary points is 40±5.
 4. Point the both lung boundary. Recommended number of single lung points is 20±3.
@@ -90,3 +90,10 @@ If you cannot figure it out anyway, please see my code.
    [Fig. 2] FEM result on EIDORS with using Fig. 1 image
        
 </div>
+
+If you used this codes well, I'll be appreciate cite this;
+
+       Won-Doo Seo and Hyeuknam Kwon, "The degree of lung collapse estimation method using
+       convolutional autoencoder and neural regression in electrical impedance tomography,
+       "ICBEM-ICEBI-EIT(International Conference on Bioelectromagnetism, Electrical Bioimpedance,
+       and Electrical Impedance Tomography) 2022, Seoul, Republic of Korea, June 29-July 1, 2022.
