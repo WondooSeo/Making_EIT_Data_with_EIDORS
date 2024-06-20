@@ -31,8 +31,8 @@ In this shape_library.mat, I added some pointed models. (lct_normal1-6, lct_obes
        
 3. Point the thorax boundary. Recommended number of boundary points is 40±5.
 4. Point the both lung boundary. Recommended number of single lung points is 20±3.
-5. Save points as [ x1 y1; x2 y2; ... ], and make a structure includes thorax and both lungs boundary points.
-6. Go to EIDORS → models → shape_library.mat, and save the structure in shape_library.mat.
+5. Save points as [ x1 y1; x2 y2; ... ], then make a structure includes thorax and both lungs boundary points.
+6. Go to EIDORS → models → shape_library.mat, and append the structure in shape_library.mat.
 7. Load!
 
 <div align = 'center'>
