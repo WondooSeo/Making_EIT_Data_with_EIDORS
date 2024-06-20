@@ -40,7 +40,7 @@ When you run this codes, they will make the result of EIT images with artificial
 
 I made codes using two methods; FER and GREIT, which has different pros and cons for each method. Or you can use the third method you want by modifying codes yourself.
 
-In my [CAENR project](https://github.com/WondooSeo/Convolutional_AutoEncoder_Neural_Regression), I used these generated EIT images as train / test datasets. You can see the samples on the ***Model architecture*** paragraph image.
+In my [CAENR project](https://github.com/WondooSeo/Convolutional_AutoEncoder_Neural_Regression), I used these generated EIT images as train / test datasets. You can see the samples on the image at ***Model architecture*** paragraph.
 
 > I used GREIT methods on my CAENR project, which result was better than FER method and comfortable to use.
 
