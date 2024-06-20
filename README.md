@@ -12,7 +12,7 @@ Add-on : Statistics and Machine Learning Toolbox / Simulink / Partial Differenti
 
 Before running this code, you have to run specific EIDORS version so that 2D GREIT works. I have no idea which version works 2D GREIT, but **Netgen v5.0.0 is necessary.**
 
-So, if you want to run it without any hesitation, please [_DOWNLOAD the EIDORS HERE_](https://drive.google.com/file/d/13vq98D0IIuffYSmG_e6PpMnI3igh6yud/view?usp=sharing)(Move to my personal Google drive). This version works perfectly on this file. If you encountered setting Netgen bin file path after running code, please write **Netgen v5.0.0 bin folder path**, not other versions.
+So, if you want to run it without any hesitation, please [_DOWNLOAD the EIDORS HERE_](https://drive.google.com/file/d/13vq98D0IIuffYSmG_e6PpMnI3igh6yud/view?usp=sharing)(Move to my personal Google drive). This version works perfectly on this file. If you encountered setting Netgen bin file path after running code, please write **Netgen v5.0.0 bin folder path**, not v.5.3 folder path.
 
 But if you have EIDORS with 2D GREIT runnable version, please just download shape_library.mat I uploaded above and paste it.
 
