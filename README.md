@@ -91,7 +91,9 @@ If you cannot figure it out anyway, please see my code.
        
 </div>
 
-If you used this codes well, I'll be appreciate cite this;
+# Citation
+
+If you used this codes well, I'll be appreciate cite this conference paper; (First announced paper of this code)
 
        Won-Doo Seo and Hyeuknam Kwon, "The degree of lung collapse estimation method using
        convolutional autoencoder and neural regression in electrical impedance tomography,
