@@ -10,11 +10,11 @@ Language : Matlab R2021b
 
 > Upper version might be okay, but I warn you not to use the lower version.
 
-Package : [EIDORS](http://eidors3d.sourceforge.net/)
-
 Add-on : Statistics and Machine Learning Toolbox / Simulink / Partial Differential Equation Toolbox / Image Processing Toolbox / Computer Vision Toolbox
 
 > I wrote what I installed when running this project, so please keep in mind that there may be useless add-ons.
+
+Package : [EIDORS](http://eidors3d.sourceforge.net/)
 
 ## Preparation
 
