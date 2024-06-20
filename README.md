@@ -2,7 +2,7 @@
 
 # Making EIT Data with EIDORS
 
-The goal of this project is to **make custom-made FEM images with MATLAB and EIDORS**.
+The goal of this project is to **make custom-made EIT images with MATLAB and EIDORS**.
 
 ## What you need to run this codes
 
