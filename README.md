@@ -93,7 +93,7 @@ If you cannot figure it out anyway, please see my code.
 
 # Citation
 
-When you used this codes well, I'll be appreciate if you cite this conference paper. This paper is the first announced paper this EIT image generation code was used.
+When you used this codes well, I'll be appreciated if you cite this conference paper. This paper is the first announced paper this EIT image generation code was used.
 
        Won-Doo Seo and Hyeuknam Kwon, "The degree of lung collapse estimation method using
        convolutional autoencoder and neural regression in electrical impedance tomography,
