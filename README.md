@@ -44,7 +44,7 @@ In my [CAENR project](https://github.com/WondooSeo/Convolutional_AutoEncoder_Neu
 
 > I used GREIT methods on my CAENR project, which result was better than FER method and comfortable to use.
 
-## Tips for Making New Thorax Shape in EIDORS
+## Tips for making new thorax shape in EIDORS
 
 1. Find appropriate axial lung CT image.
 2. Load image with x-axis as linspace(-1, 1, num of width pixel) and y-axsis as linspace(reduced/increased ratio, reduced/increased ratio, num of height pixel).
