@@ -4,6 +4,8 @@
 
 The goal of this project is to **make custom-made EIT images with MATLAB and EIDORS**.
 
+</br>
+
 ## What you need to run this codes
 
 Language : Matlab R2021b
@@ -15,6 +17,8 @@ Add-on : Statistics and Machine Learning Toolbox / Simulink / Partial Differenti
 > I wrote what I installed when running this project, so please keep in mind that there may be useless add-ons.
 
 Package : [EIDORS](http://eidors3d.sourceforge.net/)
+
+</br>
 
 ## Preparation
 
@@ -33,6 +37,8 @@ In this shape_library.mat, I added some pointed models(lct_normal1-6, lct_obese1
 <!-- Result of the EIT_Run.m : Click [_HERE_](https://drive.google.com/file/d/1v4pvYWG3csWPQuZWVLxhNOmpaHonYyCy/view?usp=sharing) (Move to my personal Google drive, there're no results of Normal 4-6 and Obese 2) -->
 
 ***Also, I'm not sure that all of .m files saves same result value because of research. So you have to modify end of codes (save part) if you have to.***
+
+</br>
 
 ## Results
 
@@ -111,6 +117,8 @@ If you cannot figure it out anyway, please see my code.
    [Fig. 2] FEM result on EIDORS using Fig. 1 image
        
 </div>
+
+</br>
 
 # Citation
 
