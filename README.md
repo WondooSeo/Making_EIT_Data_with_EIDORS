@@ -1,5 +1,7 @@
 ***※ This project is licensed under the terms of the MIT license. ※***
 
+</br>
+
 # Making EIT Data with EIDORS
 
 The goal of this project is to **make custom-made EIT images with MATLAB and EIDORS**.
