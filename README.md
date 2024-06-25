@@ -44,13 +44,13 @@ In this shape_library.mat, I added some pointed models(lct_normal1-6, lct_obese1
 
 ## Results
 
-When you run this codes, they will make the result of EIT images with artificially carved lung elements and the original one. I carved elements of left / right / both lungs with appropriate ratio. You can manage how much elements are carved by manipulating _collapseArea_ inline equation.
+When you run this codes, they will make the result of EIT images with artificially carved lung elements and the original one. I carved elements of left / right / both lungs with appropriate ratio. You can manage how much elements are carved by manipulating ```collapseArea``` inline equation.
 
-I made codes using two methods; FER and GREIT, which has different pros and cons for each method. Or you can use the third method you want by modifying codes yourself.
+I made codes using two methods; ```FER``` and ```GREIT```, which has different pros and cons for each method. Or you can use the third method you want by modifying codes yourself.
 
 In my [CAENR project](https://github.com/WondooSeo/Convolutional_AutoEncoder_Neural_Regression), I used these generated EIT images as train / test datasets. You can see the samples on the image at ***Model architecture*** paragraph.
 
-> I used GREIT methods on my CAENR project, which result was better than FER method and comfortable to use.
+> I used ```GREIT``` methods on my CAENR project, which result was better than ```FER``` method and comfortable to use.
 
 </br>
 
@@ -63,7 +63,7 @@ In my [CAENR project](https://github.com/WondooSeo/Convolutional_AutoEncoder_Neu
        
 3. Point the thorax boundary. Recommended number of boundary points is 40 ± 5.
 4. Point the both lung boundary. Recommended number of single lung points is 20 ± 3.
-5. Save points as [ x1 y1; x2 y2; ... ], then make a structure includes thorax and both lungs boundary points.
+5. Save points as ```[ x1 y1; x2 y2; ... ]```, then make a structure includes thorax and both lungs boundary points.
 6. Go to EIDORS → models → shape_library.mat, and append the structure in shape_library.mat.
 7. Load!
 
@@ -93,7 +93,7 @@ In my [CAENR project](https://github.com/WondooSeo/Convolutional_AutoEncoder_Neu
     rlung  = shape_library('get','adult','right_lung');
     llung  = shape_library('get','adult','left_lung');
     
-If you called your defined shape but it doesn't work, change the shape in function __ng_mk_extruded_model__.
+If you called your defined shape but it doesn't work, change the shape in function ```ng_mk_extruded_model```.
     
 When you change smoothing points higher than 50, then it'll work. But be aware; choose just appropriate number. **Using large number on smoothing points loads a lot of burden to your computer resources.**
 
