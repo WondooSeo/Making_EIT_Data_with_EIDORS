@@ -12,7 +12,7 @@ The goal of this project is to **make custom-made EIT images with MATLAB and EID
 
 Language : Matlab R2021b
 
-> Upper version might be okay, but I warn you not to use the lower version.
+> Upper version might be okay, but without guarantee. However, I suggest you not to use the lower version.
 
 Add-on : Statistics and Machine Learning Toolbox / Simulink / Partial Differential Equation Toolbox / Image Processing Toolbox / Computer Vision Toolbox
 
