@@ -59,7 +59,7 @@ In my [CAENR project](https://github.com/WondooSeo/Convolutional_AutoEncoder_Neu
 1. Find appropriate axial lung CT image.
 2. Load image with x-axis as linspace(-1, 1, num of width pixel) and y-axsis as linspace(-height/width, height/width, num of height pixel).
 
-> _If the size of image is 1000×500, then set x-axis as linspace(-1, 1, 1000) and y-axis as linspace(-0.5, 0.5, 500), which 0.5 = 1 × (500/1000)._
+> _If the size of image is 1000×500, then set x-axis as linspace(-1, 1, 1000) and y-axis as linspace(-0.5, 0.5, 500), which 0.5 = (500/1000)._
        
 3. Point the thorax boundary. Recommended number of boundary points is 40 ± 5.
 4. Point the both lung boundary. Recommended number of single lung points is 20 ± 3.
