@@ -118,7 +118,7 @@ If you cannot figure it out anyway, please see my code.
 
    ![LCT Obese2 Collapse shape (Collapse case 1)](https://user-images.githubusercontent.com/62936579/160920945-ba6b640f-6c1c-4fd6-adf4-f9c002c34bad.png)
 
-   [Fig. 2] FEM result on EIDORS using Fig. 1 image
+   [Fig. 2] Result of custom generated FEM image from Fig. 1 using EIDORS
        
 </div>
 
