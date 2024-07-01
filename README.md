@@ -128,4 +128,4 @@ If you cannot figure it out anyway, please see my code.
 
 When this codes help your research, I'll be appreciated if you cite this conference paper. This paper is the first announced paper that this custom-made EIT image generation code was used.
 
- > Won-Doo Seo and Hyeuknam Kwon, "The degree of lung collapse estimation method using convolutional autoencoder and neural regression in electrical impedance tomography," ICBEM-ICEBI-EIT(International Conference on Bioelectromagnetism, Electrical Bioimpedance, and Electrical Impedance Tomography) 2022, Seoul, Republic of Korea, June 29-July 1, 2022.
+ > Won-Doo Seo and Hyeuknam Kwon, "The Degree of Lung Collapse Estimation Method using Convolutional Autoencoder and Neural Regression in Electrical Impedance Tomography," ICBEM-ICEBI-EIT(International Conference on Bioelectromagnetism, Electrical Bioimpedance, and Electrical Impedance Tomography) 2022, Seoul, Republic of Korea, June 29-July 1, 2022.
